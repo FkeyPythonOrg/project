@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>top Кликер</title>
+    <style>
+        .click-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #ffe600;
+            color: white;
+            border: 2px solid #ff5e00;
+            border-radius: 4px;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+        }
+
+        .click-button:active {
+            transform: translate(-50%, -50%) scale(0.95);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .clickCount {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            background-color: #fbff00;
+            border: 2px solid #ff5e00;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+ 
+</head>
+<body>
+
+
+    <main>
+        
+        <button class="click-button" id="click-button">Нажми меня</button>
+    </main>
+
+    <footer>
+        <p class="clickCount">Количество кликов: <span id="click-count">0</span></p>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const button = document.getElementById('click-button');
+                const clickCountDisplay = document.getElementById('click-count');
+                let clickCount = 0;
+
+                button.addEventListener('click', function() {
+                    clickCount++;
+                    clickCountDisplay.textContent = clickCount;
+                });
+            });
+        </script>
+    </footer>
+</body>
+</html>
