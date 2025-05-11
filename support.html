@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Свяжитесь с нами</title>
+  <style>
+    /* Reset & Fonts */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      overflow-x: hidden;
+      transition: background 0.5s ease-in-out;
+    }
+
+    body.light {
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      color: #111;
+    }
+
+    body.night {
+      background: #000;
+      color: #eee;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 5%;
+      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      color: #00ffe7;
+    }
+
+    .header-info {
+      text-align: right;
+    }
+
+    .header-info p {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 40px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      animation: fadeInUp 0.6s ease-in-out;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #ff6ec7;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 0.95rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      color: inherit;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 8px #ff6ec7;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      padding: 10px 15px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      transition: 0.3s ease;
+      user-select: none;
+    }
+
+    .tab.active {
+      background: #ff6ec7;
+      color: #000;
+    }
+
+    .file-upload {
+      border: 2px dashed rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .file-upload:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    button.submit-btn {
+      background: linear-gradient(45deg, #00ffe7, #ff6ec7);
+      border: none;
+      padding: 15px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #000;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    button.submit-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #ff6ec7;
+    }
+
+    .contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+    }
+
+    .contact-item {
+      flex: 1 1 150px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .contact-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .faq {
+      margin-top: 40px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 15px 0;
+      cursor: pointer;
+    }
+
+    .faq-question {
+      font-weight: bold;
+      margin-bottom: 10px;
+      transition: color 0.3s ease;
+    }
+
+    .faq-answer {
+      display: none;
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      background: rgba(0, 0, 0, 0.3);
+      font-size: 0.85rem;
+      color: #aaa;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      backdrop-filter: blur(10px);
+      z-index: 999;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .header-info {
+        text-align: left;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Ваш голос важен</h1>
+  <div class="header-info">
+    <p>Мы на связи</p>
+    <p>24/7</p>
+  </div>
+</header>
+
+<main>
+  <!-- Форма обращения -->
+  <section class="card">
+    <h2>Оставьте обращение</h2>
+    <form id="complaintForm">
+      <div>
+        <label for="name">Имя</label>
+        <input type="text" id="name" name="name" placeholder="Как вас зовут?" required />
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="example@example.com" required />
+      </div>
+      <div>
+        <label>Тип проблемы</label>
+        <div class="tabs">
+          <div class="tab active" data-value="technical">Техническая</div>
+          <div class="tab" data-value="billing">Финансовая</div>
+          <div class="tab" data-value="support">Общая помощь</div>
+          <div class="tab" data-value="other">Другое</div>
+        </div>
+        <input type="hidden" id="issue-type" name="issue-type" value="technical" />
+      </div>
+      <div>
+        <label for="message">Опишите вашу проблему</label>
+        <textarea id="message" name="message" placeholder="Что случилось? Что можно добавить?" required></textarea>
+      </div>
+      <div>
+        <label>Прикрепите скриншоты или файлы</label>
+        <div class="file-upload">Нажмите, чтобы загрузить</div>
+      </div>
+      <button type="submit" class="submit-btn">Отправить</button>
+    </form>
+  </section>
+
+  <!-- Контакты -->
+  <section class="card contacts">
+    <div class="contact-item">
+      <p>💬 Онлайн-чат</p>
+      <small>Доступен в рабочие часы</small>
+    </div>
+    <div class="contact-item">
+      <p>📧 Email</p>
+      <small>support@example.com</small>
+    </div>
+    <div class="contact-item">
+      <p>📞 Телефон</p>
+      <small>+7 (XXX) XXX-XX-XX</small>
+    </div>
+    <div class="contact-item">
+      <p>📱 Telegram / WhatsApp</p>
+      <small>@support_bot</small>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="card faq">
+    <h2>Часто задаваемые вопросы</h2>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">Как долго рассматривается обращение?</div>
+      <div class="faq-answer">В среднем от 2 до 5 рабочих дней. Мы стараемся ответить как можно скорее.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">Можно ли приложить документы?</div>
+      <div class="faq-answer">Да, вы можете приложить любые файлы, которые помогут нам разобраться в вашей ситуации.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">Что делать, если не получил ответ?</div>
+      <div class="faq-answer">Если прошло более 5 дней — напишите нам повторно через чат или по телефону.</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  © 2025 Компания ООО "Ваше Удовольствие". Все права защищены.<br/>
+  Политика конфиденциальности | Пользовательское соглашение
+</footer>
+
+<button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+
+<script>
+  // Переключатель темы
+  const toggleTheme = () => {
+    const themes = ['light', 'night', ''];
+    const current = document.body.className || '';
+    const next = themes[(themes.indexOf(current) + 1) % themes.length];
+    document.body.className = next;
+    localStorage.setItem('theme', next);
+  };
+
+  // Восстановление темы из localStorage
+  window.onload = () => {
+    const savedTheme = localStorage.getItem('theme') || '';
+    if (savedTheme) {
+      document.body.className = savedTheme;
+    }
+  };
+
+  // Аккордеон FAQ
+  function toggleFAQ(item) {
+    item.classList.toggle("open");
+  }
+
+  // Табы
+  const tabs = document.querySelectorAll('.tab');
+  const hiddenInput = document.getElementById('issue-type');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      hiddenInput.value = tab.getAttribute('data-value');
+    });
+  });
+
+  // Обработка формы
+  document.getElementById('complaintForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert("Ваше обращение успешно отправлено! Спасибо, что делитесь своими мыслями.");
+    this.reset();
+  });
+</script>
+
+</body>
+</html>
